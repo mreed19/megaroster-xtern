@@ -5,6 +5,7 @@ var megaRoster = {
   init: function() {
     this.setupEventListeners();
     this.count = 0;
+    this.load();
   },
 
   setupEventListeners: function() {
@@ -21,6 +22,7 @@ var megaRoster = {
     this.count += 1;
     form.reset();
     form.studentName.focus();
+    this.store();
   },
 
   buildListItem: function(studentName) {
@@ -30,6 +32,7 @@ var megaRoster = {
       text: 'remove',
       handler: function() {
         li.remove();
+        megaRoster.store();
       }
     });
     var editLink = this.buildLink({
@@ -53,7 +56,6 @@ var megaRoster = {
           input.name = 'newStudentName';
           change.className = "button";
           cancel.className = "button secondary";
-          // li.firstChild.remove();
           form.appendChild(input);
           form.appendChild(change);
           form.appendChild(cancel);
@@ -104,6 +106,16 @@ var megaRoster = {
     form.parentNode.firstChild.remove();
     form.parentNode.insertBefore(textNode, form);
     form.remove();
+    megaRoster.store();
+  },
+
+  store: function() {
+    localStorage.removeItem('studentList');
+    localStorage.setItem('studentList', document.querySelector('#studentList').innerHTML);
+  },
+
+  load: function() {
+    document.querySelector('#studentList').innerHTML = localStorage.getItem('studentList');
   }
 };
 
