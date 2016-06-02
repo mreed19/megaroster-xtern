@@ -25,7 +25,10 @@ var megaRoster = {
 
   buildListItem: function(studentName) {
     var li = document.createElement('li');
-    var removeLink = this.buildLink('remove');
+    var removeLink = this.buildLink({
+      text: 'remove',
+      handler: function() { li.remove();}
+    });
     var promoteLink = this.buildLink('promote');
     li.innerText = studentName;
     li.appendChild(removeLink);
@@ -33,10 +36,11 @@ var megaRoster = {
     return li;
   },
 
-  buildLink: function(linkText) {
+  buildLink: function(options) {
     var link = document.createElement('a');
     link.href = "#";
-    link.innerText = linkText;
+    link.innerText = options.text;
+    link.onclick = options.handler;
     return link;
   }
 
