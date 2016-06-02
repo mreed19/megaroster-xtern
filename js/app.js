@@ -27,9 +27,16 @@ var megaRoster = {
     var li = document.createElement('li');
     var removeLink = this.buildLink({
       text: 'remove',
-      handler: function() { li.remove();}
+      handler: function() {
+        li.remove();
+      }
     });
-    var promoteLink = this.buildLink('promote');
+    var promoteLink = this.buildLink({
+      text: 'promote',
+      handler: function() {
+        li.style.border = '2px CornflowerBlue dashed';
+      }
+    });
     li.innerText = studentName;
     li.appendChild(removeLink);
     li.appendChild(promoteLink);
