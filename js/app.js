@@ -8,7 +8,7 @@ var megaRoster = {
   },
 
   setupEventListeners: function() {
-    document.querySelector('form').onsubmit = this.addStudent.bind(this);
+    document.querySelector('#studentForm').onsubmit = this.addStudent.bind(this);
   },
 
   addStudent: function(ev) {

@@ -1,4 +1,8 @@
-section > div {
+#studentForm > div {
+  padding: 0;
+}
+
+/*section > div {
   width: 80%;
   margin: 20px auto;
 }
@@ -39,4 +43,4 @@ dl:nth-of-type(even) {
     content: "";
     display: table;
   }
-}
+}*/
