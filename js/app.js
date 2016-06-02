@@ -37,9 +37,30 @@ var megaRoster = {
         li.style.border = '2px CornflowerBlue dashed';
       }
     });
+    var upLink = this.buildLink({
+      text: 'up',
+      handler: function() {
+        if (li.previousElementSibling !== null) {
+          li.parentNode.insertBefore(li, li.previousElementSibling);
+        }
+      }
+    });
+    upLink.className = "up";
+    var downLink = this.buildLink({
+      text: 'down',
+      handler: function() {
+        // debugger;
+        if (li.nextElementSibling !== null) {
+          li.parentNode.insertBefore(li.nextElementSibling, li);
+        }
+      }
+    });
+    downLink.className = "down";
     li.innerText = studentName;
     li.appendChild(removeLink);
     li.appendChild(promoteLink);
+    li.appendChild(upLink);
+    li.appendChild(downLink);
     return li;
   },
 

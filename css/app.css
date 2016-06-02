@@ -5,3 +5,13 @@
 #studentList a {
   margin-left: 1em;
 }
+
+#studentList li:first-child .up {
+  pointer-events: none;
+  color: gray;
+}
+
+#studentList li:last-child .down {
+  pointer-events: none;
+  color: gray;
+}
