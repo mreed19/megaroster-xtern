@@ -3,12 +3,20 @@ $(document).foundation();
 var megaRoster = {
 
   init: function() {
-      document.querySelector('form').onsubmit = this.addStudent;
+    this.setupEventListeners();
+    this.count = 0;
+  },
+
+  setupEventListeners: function() {
+    document.querySelector('form').onsubmit = this.addStudent.bind(this);
   },
 
   addStudent: function(ev) {
     ev.preventDefault();
-    alert('submitted');
+    var form = ev.currentTarget;
+    var studentName = form.studentName.value;
+    this.count += 1;
+    console.log(studentName);
   }
 
 
