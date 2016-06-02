@@ -17,17 +17,28 @@ var megaRoster = {
     var studentName = form.studentName.value;
     var listItem = this.buildListItem(studentName);
     var studentList = document.querySelector('#studentList')
-    studentList.appendChild(listItem);
+    studentList.insertBefore(listItem, studentList.childNodes[0]);
     this.count += 1;
+    form.reset();
+    form.studentName.focus();
   },
 
   buildListItem: function(studentName) {
     var li = document.createElement('li');
+    var removeLink = this.buildLink('remove');
+    var promoteLink = this.buildLink('promote');
     li.innerText = studentName;
+    li.appendChild(removeLink);
+    li.appendChild(promoteLink);
     return li;
+  },
+
+  buildLink: function(linkText) {
+    var link = document.createElement('a');
+    link.href = "#";
+    link.innerText = linkText;
+    return link;
   }
-
-
 
   // init: function() {
   //   var myForm = document.querySelector('form');

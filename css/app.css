@@ -2,6 +2,10 @@
   padding: 0;
 }
 
+#studentList a {
+  margin-left: 1em;
+}
+
 /*section > div {
   width: 80%;
   margin: 20px auto;
