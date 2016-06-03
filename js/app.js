@@ -12,12 +12,16 @@ var megaRoster = {
     document.querySelector('form#studentForm').onsubmit = this.addStudent.bind(this);
   },
 
+  prependChild: function(parent, child) {
+    parent.insertBefore(child, parent.firstChild);
+  },
+
   addStudent: function(ev) {
     ev.preventDefault();
     var form = ev.currentTarget;
     var studentName = form.studentName.value;
     var listItem = this.buildListItem(studentName);
-    this.studentList.insertBefore(listItem, studentList.firstChild);
+    this.prependChild(this.studentList, listItem);
     this.count += 1;
     form.reset();
     form.studentName.focus();
@@ -50,23 +54,17 @@ var megaRoster = {
     var promoteLink = this.buildLink({
       text: 'promote',
       handler: function() {
-        li.parentNode.insertBefore(li, li.parentNode.firstChild);
-      }
+        this.promote(li);
+      }.bind(this)
     });
     span.appendChild(removeLink);
     span.appendChild(promoteLink);
     li.appendChild(span);
   },
 
-  changeName: function(ev) {
-    ev.preventDefault();
-    var form = ev.currentTarget.nodeName === "A" ? ev.currentTarget.parentNode : ev.currentTarget;
-    var textNode = document.createTextNode(form.newStudentName.value);
-    form.parentNode.firstChild.remove();
-    form.parentNode.insertBefore(textNode, form);
-    form.remove();
-  },
-
+  promote: function(li) {
+    this.prependChild(this.studentList, li);
+  }
 };
 
 megaRoster.init('#studentList');
