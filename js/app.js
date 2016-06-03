@@ -29,7 +29,10 @@ var megaRoster = {
 
   buildListItem: function(studentName) {
     var li = document.createElement('li');
-    li.innerText = studentName;
+    var span = document.createElement('span');
+    span.innerText = studentName;
+    span.className = 'studentName';
+    li.appendChild(span);
     this.appendLinks(li);
     return li;
   },
@@ -73,6 +76,13 @@ var megaRoster = {
         this.moveDown(li);
       }.bind(this)
     });
+    span.appendChild(this.buildLink({
+      text: 'edit',
+      className: 'edit',
+      handler: function() {
+        this.toggleEditable(li.querySelector('span.studentName'));
+      }.bind(this)
+    }));
     span.appendChild(removeLink);
     span.appendChild(promoteLink);
     span.appendChild(upLink);
@@ -90,6 +100,19 @@ var megaRoster = {
 
   moveDown: function(li) {
     this.studentList.insertBefore(li.nextElementSibling, li);
+  },
+
+  toggleEditable: function(el) {
+    var toggleElement = el.parentElement.querySelector('a.edit');
+    if (el.contentEditable === 'true') {
+      el.contentEditable = 'false';
+      toggleElement.innerHTML = 'edit';
+    }
+    else {
+      el.contentEditable = 'true';
+      el.focus();
+      toggleElement.innerHTML = 'save';
+    }
   }
 };
 

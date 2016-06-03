@@ -17,3 +17,14 @@ span.actions {
   display: inline-block;
   float: right;
 }
+
+span.studentName {
+  display: inline-block;
+  padding: 1px;
+  width: 15em;
+}
+
+span[contenteditable=true] {
+  border: 1px solid #ccc;
+  padding: 0;
+}
