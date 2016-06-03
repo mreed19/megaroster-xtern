@@ -5,6 +5,7 @@ var megaRoster = {
   init: function() {
     this.setupEventListeners();
     this.count = 0;
+    this.studentList = document.querySelector('#studentList');
   },
 
   setupEventListeners: function() {
@@ -16,8 +17,7 @@ var megaRoster = {
     var form = ev.currentTarget;
     var studentName = form.studentName.value;
     var listItem = this.buildListItem(studentName);
-    var studentList = document.querySelector('#studentList')
-    studentList.insertBefore(listItem, studentList.firstChild);
+    this.studentList.insertBefore(listItem, studentList.firstChild);
     this.count += 1;
     form.reset();
     form.studentName.focus();
@@ -50,7 +50,7 @@ var megaRoster = {
     var promoteLink = this.buildLink({
       text: 'promote',
       handler: function() {
-        li.style.border = '2px dashed CornflowerBlue';
+        li.parentNode.insertBefore(li, li.parentNode.firstChild);
       }
     });
     span.appendChild(removeLink);
