@@ -16,7 +16,7 @@
   color: gray;
 }
 
-#studentList li:first-child .top {
+#studentList li:first-child .promote {
   pointer-events: none;
   color: gray;
 }
