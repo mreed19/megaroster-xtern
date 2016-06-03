@@ -15,3 +15,8 @@
   pointer-events: none;
   color: gray;
 }
+
+#studentList li:first-child .top {
+  pointer-events: none;
+  color: gray;
+}

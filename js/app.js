@@ -5,7 +5,7 @@ var megaRoster = {
   init: function() {
     this.setupEventListeners();
     this.count = 0;
-    this.load();
+    // this.load();
   },
 
   setupEventListeners: function() {
@@ -22,7 +22,7 @@ var megaRoster = {
     this.count += 1;
     form.reset();
     form.studentName.focus();
-    this.store();
+    // this.store();
   },
 
   buildListItem: function(studentName) {
@@ -82,12 +82,20 @@ var megaRoster = {
       }
     });
     downLink.className = "down";
+    var topLink = this.buildLink({
+      text: 'top',
+      handler: function() {
+        li.parentNode.insertBefore(li, li.parentNode.firstChild);
+      }
+    });
+    topLink.className = "top";
     li.appendChild(text);
     li.appendChild(editLink);
     li.appendChild(removeLink);
     li.appendChild(promoteLink);
     li.appendChild(upLink);
     li.appendChild(downLink);
+    li.appendChild(topLink);
     return li;
   },
 
@@ -106,17 +114,17 @@ var megaRoster = {
     form.parentNode.firstChild.remove();
     form.parentNode.insertBefore(textNode, form);
     form.remove();
-    megaRoster.store();
+    // megaRoster.store();
   },
 
-  store: function() {
-    localStorage.removeItem('studentList');
-    localStorage.setItem('studentList', document.querySelector('#studentList').innerHTML);
-  },
-
-  load: function() {
-    document.querySelector('#studentList').innerHTML = localStorage.getItem('studentList');
-  }
+  // store: function() {
+  //   localStorage.removeItem('studentList');
+  //   localStorage.setItem('studentList', document.querySelector('#studentList').innerHTML);
+  // },
+  //
+  // load: function() {
+  //   document.querySelector('#studentList').innerHTML = localStorage.getItem('studentList');
+  // }
 };
 
 megaRoster.init();
