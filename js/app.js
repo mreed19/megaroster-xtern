@@ -57,13 +57,38 @@ var megaRoster = {
         this.promote(li);
       }.bind(this)
     });
+    var upLink = this.buildLink({
+      text: 'up',
+      handler: function() {
+        this.moveUp(li);
+      }.bind(this)
+    });
+    var downLink = this.buildLink({
+      text: 'down',
+      handler: function() {
+        this.moveDown(li);
+      }.bind(this)
+    });
+    promoteLink.className += 'promote';
+    upLink.className += 'up';
+    downLink.className += 'down';
     span.appendChild(removeLink);
     span.appendChild(promoteLink);
+    span.appendChild(upLink);
+    span.appendChild(downLink);
     li.appendChild(span);
   },
 
   promote: function(li) {
     this.prependChild(this.studentList, li);
+  },
+
+  moveUp: function(li) {
+    this.studentList.insertBefore(li, li.previousElementSibling);
+  },
+
+  moveDown: function(li) {
+    this.studentList.insertBefore(li.nextElementSibling, li);
   }
 };
 
