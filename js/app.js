@@ -2,10 +2,10 @@ $(document).foundation();
 
 var megaRoster = {
 
-  init: function() {
+  init: function(listSelector) {
     this.setupEventListeners();
     this.count = 0;
-    this.studentList = document.querySelector('#studentList');
+    this.studentList = document.querySelector(listSelector);
   },
 
   setupEventListeners: function() {
@@ -69,4 +69,4 @@ var megaRoster = {
 
 };
 
-megaRoster.init();
+megaRoster.init('#studentList');
