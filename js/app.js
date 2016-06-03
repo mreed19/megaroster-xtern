@@ -40,6 +40,7 @@ var megaRoster = {
 
   appendLinks: function(li) {
     var span = document.createElement('span');
+    span.className += 'actions';
     var removeLink = this.buildLink({
       text: 'remove',
       handler: function() {
