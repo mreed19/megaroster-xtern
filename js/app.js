@@ -39,6 +39,7 @@ var megaRoster = {
     link.href = "#";
     link.innerText = options.text;
     link.onclick = options.handler;
+    link.className += (options.className || '');
     return link;
   },
 
@@ -53,25 +54,25 @@ var megaRoster = {
     });
     var promoteLink = this.buildLink({
       text: 'promote',
+      className: 'promote',
       handler: function() {
         this.promote(li);
       }.bind(this)
     });
     var upLink = this.buildLink({
       text: 'up',
+      className: 'up',
       handler: function() {
         this.moveUp(li);
       }.bind(this)
     });
     var downLink = this.buildLink({
       text: 'down',
+      className: 'down',
       handler: function() {
         this.moveDown(li);
       }.bind(this)
     });
-    promoteLink.className += 'promote';
-    upLink.className += 'up';
-    downLink.className += 'down';
     span.appendChild(removeLink);
     span.appendChild(promoteLink);
     span.appendChild(upLink);

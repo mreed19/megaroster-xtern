@@ -6,21 +6,12 @@
   margin-left: 1em;
 }
 
-#studentList li:first-child .up {
+#studentList li:first-child a.up,
+#studentList li:last-child a.down,
+#studentList li:first-child a.promote {
   pointer-events: none;
-  color: gray;
+  color: #ddd;
 }
-
-#studentList li:last-child .down {
-  pointer-events: none;
-  color: gray;
-}
-
-#studentList li:first-child .promote {
-  pointer-events: none;
-  color: gray;
-}
-
 
 span.actions {
   display: inline-block;
