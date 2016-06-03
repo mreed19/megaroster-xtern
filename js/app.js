@@ -6,6 +6,15 @@ var megaRoster = {
     this.setupEventListeners();
     this.count = 0;
     this.studentList = document.querySelector(listSelector);
+    this.roster = [];
+  },
+
+  load: function() {
+
+  },
+
+  save: function() {
+
   },
 
   setupEventListeners: function() {
@@ -40,7 +49,7 @@ var megaRoster = {
   buildLink: function(options) {
     var link = document.createElement('a');
     link.href = "#";
-    link.innerText = options.text;
+    link.innerHTML = options.contents;
     link.onclick = options.handler;
     link.className += (options.className || '');
     return link;
@@ -50,34 +59,34 @@ var megaRoster = {
     var span = document.createElement('span');
     span.className += 'actions';
     var removeLink = this.buildLink({
-      text: 'remove',
+      contents: 'remove',
       handler: function() {
         li.remove();
       }
     });
     var promoteLink = this.buildLink({
-      text: 'promote',
+      contents: 'promote',
       className: 'promote',
       handler: function() {
         this.promote(li);
       }.bind(this)
     });
     var upLink = this.buildLink({
-      text: 'up',
+      contents: '<i class="fa fa-arrow-up"></i>',
       className: 'up',
       handler: function() {
         this.moveUp(li);
       }.bind(this)
     });
     var downLink = this.buildLink({
-      text: 'down',
+      contents: '<i class="fa fa-arrow-down"></i>',
       className: 'down',
       handler: function() {
         this.moveDown(li);
       }.bind(this)
     });
     span.appendChild(this.buildLink({
-      text: 'edit',
+      contents: 'edit',
       className: 'edit',
       handler: function() {
         this.toggleEditable(li.querySelector('span.studentName'));
