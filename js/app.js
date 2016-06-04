@@ -74,7 +74,8 @@ var megaRoster = {
     var span = document.createElement('span');
     span.className += 'actions';
     var removeLink = this.buildLink({
-      contents: 'remove',
+      contents: '<i class="fa fa-trash"></i>',
+      className: 'remove',
       handler: function() {
         this.remove(li);
       }.bind(this)
@@ -101,14 +102,14 @@ var megaRoster = {
       }.bind(this)
     });
     span.appendChild(this.buildLink({
-      contents: 'edit',
+      contents: '<i class="fa fa-pencil"></i>',
       className: 'edit',
       handler: function() {
         this.toggleEditable(li.querySelector('span.studentName'));
       }.bind(this)
     }));
     span.appendChild(this.buildLink({
-      contents: 'favorite',
+      contents: '<i class="fa fa-star"></i>',
       className: 'favorite',
       handler:function() {
         this.favorite(li);
