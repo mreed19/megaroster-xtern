@@ -105,6 +105,13 @@ var megaRoster = {
         this.toggleEditable(li.querySelector('span.studentName'));
       }.bind(this)
     }));
+    span.appendChild(this.buildLink({
+      contents: 'favorite',
+      className: 'favorite',
+      handler:function() {
+        this.favorite(li);
+      }.bind(this)
+    }))
     span.appendChild(removeLink);
     span.appendChild(promoteLink);
     span.appendChild(upLink);
@@ -168,6 +175,10 @@ var megaRoster = {
       el.focus();
       toggleElement.innerHTML = 'save';
     }
+  },
+
+  favorite: function(li) {
+    li.style.backgroundColor = 'Gold';
   },
 
   orderIds: function(options) {
