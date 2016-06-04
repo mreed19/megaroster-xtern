@@ -15,7 +15,7 @@ var megaRoster = {
     if (loadList !== null) {
       var listObjects = JSON.parse(loadList);
       while (listObjects.length !== 0) {
-        this.prependChild(this.studentList, this.buildListItem(listObjects.pop().studentName));
+        this.prependChild(this.studentList, this.buildListItem(listObjects.pop()));
       }
     }
   },
@@ -35,23 +35,25 @@ var megaRoster = {
   addStudent: function(ev) {
     ev.preventDefault();
     var form = ev.currentTarget;
-    var studentName = form.studentName.value;
-    var listItem = this.buildListItem(studentName);
+    var listItem = this.buildListItem({
+      studentName: form.studentName.value,
+      favorited: false
+    });
     this.prependChild(this.studentList, listItem);
     form.reset();
     form.studentName.focus();
   },
 
-  buildListItem: function(studentName) {
+  buildListItem: function(student) {
     var li = document.createElement('li');
     var span = document.createElement('span');
-    var student = {
-      studentName: studentName
-    }
     li.dataset.id = this.count;
     this.roster.unshift(student);
-    span.innerText = studentName;
+    span.innerText = student.studentName;
     span.className = 'studentName';
+    if (student.favorited) {
+      li.style.backgroundColor = 'Gold';
+    }
     li.appendChild(span);
     this.appendLinks(li);
     this.count += 1;
@@ -179,6 +181,8 @@ var megaRoster = {
 
   favorite: function(li) {
     li.style.backgroundColor = 'Gold';
+    this.roster[this.count - li.dataset.id - 1].favorited = true;
+    this.save();
   },
 
   orderIds: function(options) {
