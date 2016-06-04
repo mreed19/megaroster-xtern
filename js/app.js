@@ -160,6 +160,8 @@ var megaRoster = {
     if (el.contentEditable === 'true') {
       el.contentEditable = 'false';
       toggleElement.innerHTML = 'edit';
+      this.roster[this.count - el.parentNode.dataset.id - 1].studentName = el.innerText;
+      this.save();
     }
     else {
       el.contentEditable = 'true';
