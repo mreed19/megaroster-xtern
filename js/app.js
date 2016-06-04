@@ -7,14 +7,21 @@ var megaRoster = {
     this.count = 0;
     this.studentList = document.querySelector(listSelector);
     this.roster = [];
+    this.load();
   },
 
   load: function() {
-
+    var loadList = localStorage.getItem('roster');
+    if (loadList !== undefined) {
+      var listObjects = JSON.parse(loadList);
+      while (listObjects.length !== 0) {
+        this.prependChild(this.studentList, this.buildListItem(listObjects.pop().studentName));
+      }
+    }
   },
 
   save: function() {
-
+    localStorage.setItem('roster', JSON.stringify(this.roster));
   },
 
   setupEventListeners: function() {
@@ -31,7 +38,6 @@ var megaRoster = {
     var studentName = form.studentName.value;
     var listItem = this.buildListItem(studentName);
     this.prependChild(this.studentList, listItem);
-    this.count += 1;
     form.reset();
     form.studentName.focus();
   },
@@ -39,10 +45,17 @@ var megaRoster = {
   buildListItem: function(studentName) {
     var li = document.createElement('li');
     var span = document.createElement('span');
+    var student = {
+      studentName: studentName
+    }
+    li.dataset.id = this.count;
+    this.roster.unshift(student);
     span.innerText = studentName;
     span.className = 'studentName';
     li.appendChild(span);
     this.appendLinks(li);
+    this.count += 1;
+    this.save();
     return li;
   },
 
