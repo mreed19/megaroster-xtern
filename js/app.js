@@ -180,8 +180,14 @@ var megaRoster = {
   },
 
   favorite: function(li) {
-    li.style.backgroundColor = 'Gold';
-    this.roster[this.count - li.dataset.id - 1].favorited = true;
+    if (this.roster[this.count - li.dataset.id - 1].favorited) {
+      li.style.backgroundColor = '';
+      this.roster[this.count - li.dataset.id - 1].favorited = false;
+    }
+    else {
+      li.style.backgroundColor = 'Gold';
+      this.roster[this.count - li.dataset.id - 1].favorited = true;
+    }
     this.save();
   },
 
