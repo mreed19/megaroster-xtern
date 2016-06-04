@@ -115,13 +115,10 @@ var megaRoster = {
   remove: function(li) {
     this.roster.splice(this.count - li.dataset.id - 1, 1);
     this.count -= 1;
-    var id = this.count - 1;
-    var current = li.parentNode.firstChild;
-    while (id !== li.dataset.id - 1) {
-      current.dataset.id = id;
-      id--;
-      current = current.nextElementSibling;
-    }
+    this.orderIds({
+      id: this.count - 1,
+      li: li
+    });
     li.remove();
     this.save();
   },
@@ -129,14 +126,10 @@ var megaRoster = {
   promote: function(li) {
     var promoted = this.roster.splice(this.count - li.dataset.id - 1, 1);
     this.roster.unshift(promoted[0]);
-    // debugger;
-    var id = this.count - 2;
-    var current = li.parentNode.firstChild;
-    while (id != li.dataset.id - 1) {
-      current.dataset.id = id;
-      id--;
-      current = current.nextElementSibling;
-    }
+    this.orderIds({
+      id: this.count - 2,
+      li: li,
+    });
     li.dataset.id = this.count - 1;
     this.prependChild(this.studentList, li);
     this.save();
@@ -174,6 +167,15 @@ var megaRoster = {
       toggleElement.innerHTML = 'save';
     }
   },
+
+  orderIds: function(options) {
+    var current = options.li.parentNode.firstChild;
+    while (options.id != options.li.dataset.id - 1) {
+      current.dataset.id = options.id;
+      options.id--;
+      current = current.nextElementSibling;
+    }
+  }
 };
 
 megaRoster.init('#studentList');
