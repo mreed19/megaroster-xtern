@@ -127,7 +127,19 @@ var megaRoster = {
   },
 
   promote: function(li) {
+    var promoted = this.roster.splice(this.count - li.dataset.id - 1, 1);
+    this.roster.unshift(promoted[0]);
+    // debugger;
+    var id = this.count - 2;
+    var current = li.parentNode.firstChild;
+    while (id != li.dataset.id - 1) {
+      current.dataset.id = id;
+      id--;
+      current = current.nextElementSibling;
+    }
+    li.dataset.id = this.count - 1;
     this.prependChild(this.studentList, li);
+    this.save();
   },
 
   moveUp: function(li) {
