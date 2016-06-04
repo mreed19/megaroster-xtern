@@ -12,7 +12,7 @@ var megaRoster = {
 
   load: function() {
     var loadList = localStorage.getItem('roster');
-    if (loadList !== undefined) {
+    if (loadList !== null) {
       var listObjects = JSON.parse(loadList);
       while (listObjects.length !== 0) {
         this.prependChild(this.studentList, this.buildListItem(listObjects.pop().studentName));
@@ -74,8 +74,8 @@ var megaRoster = {
     var removeLink = this.buildLink({
       contents: 'remove',
       handler: function() {
-        li.remove();
-      }
+        this.remove(li);
+      }.bind(this)
     });
     var promoteLink = this.buildLink({
       contents: 'promote',
@@ -112,15 +112,41 @@ var megaRoster = {
     li.appendChild(span);
   },
 
+  remove: function(li) {
+    this.roster.splice(this.count - li.dataset.id - 1, 1);
+    this.count -= 1;
+    var id = this.count - 1;
+    var current = li.parentNode.firstChild;
+    while (id !== li.dataset.id - 1) {
+      current.dataset.id = id;
+      id--;
+      current = current.nextElementSibling;
+    }
+    li.remove();
+    this.save();
+  },
+
   promote: function(li) {
     this.prependChild(this.studentList, li);
   },
 
   moveUp: function(li) {
+    var temp = this.roster[this.count - li.dataset.id - 1];
+    this.roster[this.count - li.dataset.id - 1] = this.roster[this.count - li.dataset.id - 2];
+    this.roster[this.count - li.dataset.id - 2] = temp;
+    li.dataset.id++;
+    li.previousElementSibling.dataset.id--;
+    this.save();
     this.studentList.insertBefore(li, li.previousElementSibling);
   },
 
   moveDown: function(li) {
+    var temp = this.roster[this.count - li.dataset.id - 1];
+    this.roster[this.count - li.dataset.id - 1] = this.roster[this.count - li.dataset.id];
+    this.roster[this.count - li.dataset.id] = temp;
+    li.dataset.id--;
+    li.nextElementSibling.dataset.id++;
+    this.save();
     this.studentList.insertBefore(li.nextElementSibling, li);
   },
 
@@ -135,7 +161,7 @@ var megaRoster = {
       el.focus();
       toggleElement.innerHTML = 'save';
     }
-  }
+  },
 };
 
 megaRoster.init('#studentList');
