@@ -199,7 +199,7 @@ var megaRoster = {
       options.id--;
       current = current.nextElementSibling;
     }
-  },
+  }
 };
 
 megaRoster.init('#studentList');
