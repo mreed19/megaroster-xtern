@@ -216,7 +216,7 @@ function loadMutants(data) {
   $.each(data, function(i, mutant) {
     megaRoster.prependChild(megaRoster.studentList, megaRoster.buildListItem({
       studentName: '<i class="fa fa-android"></i>' + mutant.mutant_name + '[' + mutant.real_name + '](' + mutant.power + ')',
-      favorited: true
+      favorited: false
     }));
   });
 }
