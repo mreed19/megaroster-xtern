@@ -49,7 +49,7 @@ var megaRoster = {
     var span = document.createElement('span');
     li.dataset.id = this.count;
     this.roster.unshift(student);
-    span.innerText = student.studentName;
+    span.innerHTML = student.studentName;
     span.className = 'studentName';
     if (student.favorited) {
       li.style.backgroundColor = 'Gold';
@@ -215,7 +215,7 @@ $('a[data-remote="true"]').on('click', function(e) {
 function loadMutants(data) {
   $.each(data, function(i, mutant) {
     megaRoster.prependChild(megaRoster.studentList, megaRoster.buildListItem({
-      studentName: mutant.mutant_name + '[' + mutant.real_name + '](' + mutant.power + ')',
+      studentName: '<i class="fa fa-android"></i>' + mutant.mutant_name + '[' + mutant.real_name + '](' + mutant.power + ')',
       favorited: true
     }));
   });
