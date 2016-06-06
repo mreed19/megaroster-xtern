@@ -199,7 +199,24 @@ var megaRoster = {
       options.id--;
       current = current.nextElementSibling;
     }
-  }
+  },
 };
 
 megaRoster.init('#studentList');
+$('a[data-remote="true"]').on('click', function(e) {
+  e.preventDefault();
+  $.ajax({
+    url: $(this).attr('href'),
+    method: 'get',
+    success: loadMutants
+  });
+});
+
+function loadMutants(data) {
+  $.each(data, function(i, mutant) {
+    megaRoster.prependChild(megaRoster.studentList, megaRoster.buildListItem({
+      studentName: mutant.mutant_name + '[' + mutant.real_name + '](' + mutant.power + ')',
+      favorited: true
+    }));
+  });
+}
