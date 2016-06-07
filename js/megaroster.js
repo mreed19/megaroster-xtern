@@ -80,7 +80,6 @@ var megaRoster = {
     ev.preventDefault();
     var f = ev.currentTarget;
     this.addMutant({
-      id: (this.max + 1),
       mutant_name: f.mutantName.value,
       real_name: f.mutantRealName.value,
       power: f.mutantPower.value,

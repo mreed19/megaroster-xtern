@@ -18,11 +18,6 @@ $.extend(megaRoster, {
   },
 
   addMutant: function(mutant) {
-    this.addStudent({
-      name: mutant.mutant_name,
-      id: mutant.id
-    });
-    // debugger;
     $.ajax({
       url: "https://mutant-school.herokuapp.com/api/v1/mutants",
       type: "POST",
@@ -36,8 +31,14 @@ $.extend(megaRoster, {
               "real_name": mutant.real_name,
               "mutant_name": mutant.mutant_name
           }
-        })
-      })
+        }),
+        success: function(result) {
+          this.addStudent({
+            name: '<i class="fa fa-android"></i>' + result.mutant_name + '[' + result.real_name + '](' + result.power + ')',
+            id: result.id
+          });
+        }.bind(this)
+      });
   },
 
   buildListItem: function(student) {
@@ -45,7 +46,7 @@ $.extend(megaRoster, {
     if(student.promoted) {
       listItem.addClass('promoted');
     }
-    listItem.find('.student-name').text(student.name)
+    listItem.find('.student-name').html(student.name)
     return listItem.attr('data-id', student.id).removeClass('hide');
   },
 
