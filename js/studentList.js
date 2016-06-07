@@ -17,6 +17,29 @@ $.extend(megaRoster, {
     }
   },
 
+  addMutant: function(mutant) {
+    this.addStudent({
+      name: mutant.mutant_name,
+      id: mutant.id
+    });
+    // debugger;
+    $.ajax({
+      url: "https://mutant-school.herokuapp.com/api/v1/mutants",
+      type: "POST",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      contentType: "application/json",
+      data: JSON.stringify({
+          "mutant": {
+              "power": mutant.power,
+              "real_name": mutant.real_name,
+              "mutant_name": mutant.mutant_name
+          }
+        })
+      })
+  },
+
   buildListItem: function(student) {
     var listItem = this.studentItemTemplate.clone();
     if(student.promoted) {

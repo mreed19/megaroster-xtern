@@ -54,6 +54,7 @@ var megaRoster = {
     doc.on('click', '.student .remove', this.removeStudent.bind(this));
     doc.on('click', '.student .cancel', this.toggleEditable.bind(this));
     doc.on('submit', '.student form', this.saveStudent.bind(this));
+    $('form#mutant_form').on('submit', this.addMutantViaForm.bind(this));
 
     this.setupAjax();
     this.setupMutantAjax();
@@ -73,5 +74,18 @@ var megaRoster = {
     });
     f.reset();
     f.studentName.focus();
+  },
+
+  addMutantViaForm: function(ev) {
+    ev.preventDefault();
+    var f = ev.currentTarget;
+    this.addMutant({
+      id: (this.max + 1),
+      mutant_name: f.mutantName.value,
+      real_name: f.mutantRealName.value,
+      power: f.mutantPower.value,
+    });
+    f.reset();
+    f.mutantName.focus();
   },
 };
