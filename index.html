@@ -4,41 +4,69 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MegaRoster</title>
+    <title>MegaRoster!</title>
     <link rel="stylesheet" href="css/foundation.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
-
     <div class="row">
-      <div class="medium-8 columns medium-offset-2">
+      <div class="medium-offset-2 medium-8 columns">
         <h2>MegaRoster</h2>
-        <form id="studentForm">
-          <div class="small-9 columns">
-            <input type="text" name="studentName" placeholder="Enter student name" required>
-          </div>
-          <div class="small-3 columns">
-            <button class="button expanded" type="submit">Add Student</button>
-          </div>
+        <p class="ajax-buttons">
+          <a class="button" href="http://davestrus.com/data/roster.json" data-remote="true">Load students from server</a>
+          <a class="button"
+             href="https://mutant-school.herokuapp.com/api/v1/mutants"
+             data-remote-mutants="true">Load mutants</a>
+          <a href="#" class="alert button">Clear</a>
+        </p>
+        <form id="student_form">
+          <div class="input-group">
+            <input type="text"
+                   name="studentName"
+                   class="input-group-field"
+                   placeholder="Enter student name"
+                   required>
+            <div class="input-group-button">
+              <button type="submit" class="success button expanded">Add Student</button>
+            </div>
+         </div>
         </form>
       </div>
     </div>
+
     <div class="row">
-      <div class="medium-8 columns medium-offset-2">
-        <a class="button" href="https://mutant-school.herokuapp.com/api/v1/mutants" data-remote="true">Load all Mutants</a>
-        <a href="#" class="alert button" id="clear">Clear</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="medium-8 columns medium-offset-2">
-        <ul class="no-bullet" id="studentList"></ul>
+      <div class="medium-8 medium-offset-2 columns">
+        <ul class="no-bullet" id="student_list">
+          <li class="student template hide clearfix">
+            <span class="student-name editable"></span>
+            <span class="actions expanded button-group">
+              <a href="#" class="edit button"><i class="fa fa-pencil"></i></a>
+              <a href="#" class="promote warning button"><i class="fa fa-star"></i></a>
+              <a href="#" class="move-up button"><i class="fa fa-arrow-up"></i></a>
+              <a href="#" class="move-down button"><i class="fa fa-arrow-down"></i></a>
+              <a href="#" class="remove alert button"><i class="fa fa-trash-o"></i></a>
+            </span>
+            <form class="edit-form hide">
+              <div class="input-group">
+                <input type="text" name="studentName" class="input-group-field">
+                <div class="input-group-button">
+                  <button type="submit" class="success button"><i class="fa fa-check"></i></button
+                  ><button type="button" class="alert cancel button"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+            </form>
+          </li>
+        </ul>
       </div>
     </div>
 
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.js"></script>
+    <script src="js/megaroster.js"></script>
+    <script src="js/studentlist.js"></script>
+    <script src="js/ajax.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
